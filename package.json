@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "jquery": "^3.3.1",
     "nodejs-websocket": "^1.7.1"
   }
 }

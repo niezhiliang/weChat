@@ -6,6 +6,7 @@
     <script src="./amazeui/js/amazeui.js"></script>
     <link rel="stylesheet" href="./amazeui/css/amazeui.css"/>
     <link rel="stylesheet" href="./amazeui/css/amazeui.min.css"/>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
 
     <style>
         body {
@@ -178,4 +179,50 @@
         <button type="button" class="am-btn am-btn-success am-round send">发送</button>
     </div>
 </body>
+<script>
+    $(function () {
+        // 打开一个 web socket
+        var ws = new WebSocket("ws://localhost:8080/");
+        var user= {
+            username: testone,
+            msg: 'shabi'
+        }
+        WebSocketTest()
+        function WebSocketTest()
+        {
+            if ("WebSocket" in window)
+            {
+
+
+                ws.onopen = function()
+                {
+                    alert("123")
+                     ws.send(user);
+
+                };
+
+                ws.onmessage = function (evt)
+                {
+                    var received_msg = evt.data;
+                    //alert("数据已接收...");
+                };
+
+                ws.onclose = function()
+                {
+                    // 关闭 websocket
+                   // alert("连接已关闭...");
+                };
+            }
+        }
+
+        function send(ws) {
+            ws.onopen = function()
+            {
+                alert("123")
+                ws.send(user);
+
+            };
+        }
+    })
+</script>
 </html>
