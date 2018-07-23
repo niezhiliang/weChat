@@ -41,17 +41,19 @@
             text-align:left;
             display: flex;
             margin-top: 5px;
+            height: auto;
         }
         .sendbody {
             text-align:right;
             margin-top: 5px;
+            height: auto;
         }
         .msgreceive {
             background-color: white;
             padding: 2px;
             border-radius: 10px;
             padding:0 10px ;
-            height: 40px;
+            height: auto;
             line-height: 40px;
             max-width: 250px;
 
@@ -62,7 +64,8 @@
             padding: 2px;
             border-radius: 10px;
             padding:0 10px ;
-            height: 40px;
+            height: auto;
+            text-align: left !important;
             line-height: 40px;
             max-width: 250px;
         }
@@ -222,12 +225,5 @@
             //将发送内容加到聊天记录框中
             addMsg(img,msg,true)
         }
-        // for (i=0;i< 6; i++) {
-        //     if (i > 2) {
-        //         addMsg('./amazeui/img/pig.jpeg','How are you ? ',false)
-        //     } else {
-        //         addMsg('./amazeui/img/dog.jpeg','I am fine And you ? ',true)
-        //     }
-        // }
 </script>
 </html>
