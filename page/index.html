@@ -13,38 +13,55 @@
         }
         .chattop {
             height: 30px;
-            background: antiquewhite;
+            background: rgb(245, 214, 173);
             border-radius: 5px;
             text-align: center;
             color: white;
             font-size: 15px;
         }
         .persons {
+            padding:10px 40px;
             height: 70px;
         }
         .chatcontent {
-            margin-left: auto;
-            margin-right: auto;
-            padding: 10px;
-            width: 96%;
-            height: 75%;
-            overflow:scroll;
+            margin:20px auto;
+            width: 85%;
+            height: 65%;
+            padding-top:10px;
+            position: relative;
+            overflow-y:scroll;
+            overflow-x:hidden;
+            border: 1px solid #ccc;
+            text-shadow: 1px 1px 1px #ddd;
+            border-radius: 5px;
         }
         .receivebody {
-
+            text-align:left;
+            display: flex;
         }
         .sendbody {
+            text-align:right;
             margin-top: 5px;
         }
         .msgreceive {
             background-color: white;
             padding: 2px;
-            border-radius: 2px;
-            max-width: 80%;
+            border-radius: 10px;
+            padding:0 10px ;
+            height: 40px;
+            line-height: 40px;
+            max-width: 250px;
+            
         }
         .msgsend {
-            background-color: #44b549;
-            border-radius: 2px;
+            display: inline-block;
+            background-color: rgb(245, 214, 173);
+            padding: 2px;
+            border-radius: 10px;
+            padding:0 10px ;
+            height: 40px;
+            line-height: 40px;
+            max-width: 250px;
         }
         .eidtmsg {
             height: 50px;
@@ -53,8 +70,25 @@
             padding: 5px !important;
             width: 78%;
         }
+        .input-area{
+            background: rgb(238, 237, 237);
+            border-top:1px solid #ddd;
+            position: absolute;
+            width:100%;
+            height:70px;
+            bottom:0;
+        }
+        .input-area input{
+            margin:1%;
+            width:78%;
+            border-radius:5px; 
+        }
         .send {
-            margin-top: 10px;
+            width:15%;
+            height:60%;
+            margin-top:15px;
+            margin-right:1%;
+            float: right;
         }
         /*.triangle-left {*/
             /*width: 0;*/
@@ -172,10 +206,11 @@
                 你好啊    卧槽
             </div>
         </div>
+        <div class="input-area">
+            <input type="email" class="eidtmsg" id="doc-ipt-email-1" placeholder="输入要发送信息">
+            <button type="button" class="am-btn am-btn-success am-round send">发送</button>
+        </div>
     </div>
-    <div>
-        <input type="email" class="eidtmsg" id="doc-ipt-email-1" placeholder="输入要发送信息">
-        <button type="button" class="am-btn am-btn-success am-round send">发送</button>
-    </div>
+    
 </body>
 </html>
