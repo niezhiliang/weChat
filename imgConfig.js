@@ -1,12 +1,14 @@
 var imgs = {
     imgArray:     [
                     './amazeui/img/cat.jpeg',
+                    './amazeui/img/cat2.jpg',
                     './amazeui/img/dog.jpeg',
-                    './amazeui/img/monkey.jpeg',
+                    './amazeui/img/dog2.jpg',
                     './amazeui/img/pig.jpeg',
-                    './amazeui/img/tu.jpeg'
+                    './amazeui/img/wu.jpg',
+                    './amazeui/img/yang.jpg'
                   ],
-    imgSize: 5
+    imgSize: 7
 }
 
 

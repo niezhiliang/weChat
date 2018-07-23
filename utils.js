@@ -42,7 +42,7 @@ function Utils() {
         }
         while (true) {
             //随机生成一个图片数量以内的随机数
-            var index = num=Math.floor(Math.random()*(imags.imgSize));
+            var index = Math.floor(Math.random()*(imags.imgSize));
 
             //如果生成头像下标未被使用 则返回图片地址
             if (nums.indexOf(index) == -1) {

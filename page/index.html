@@ -105,9 +105,9 @@
              class="am-img-thumbnail am-circle" width="50px" height="50px">
         <img src="./amazeui/img/dog.jpeg" alt="苏雨"
              class="am-img-thumbnail am-circle" width="50px" height="50px">
-        <img src="./amazeui/img/pig.jpeg" alt="苏雨"
+        <img src="./amazeui/img/cat.jpeg" alt="苏雨"
              class="am-img-thumbnail am-circle" width="50px" height="50px">
-        <img src="./amazeui/img/dog.jpeg" alt="苏雨"
+        <img src="./amazeui/img/wu.jpg" alt="苏雨"
              class="am-img-thumbnail am-circle" width="50px" height="50px"> &nbsp;&nbsp;...
         <input id ="img" type="hidden"/>
         <input id ="imgindex" type="hidden"/>
@@ -124,8 +124,12 @@
 </body>
 <script>
 
+    var username = Math.floor(Math.random()*(100000));
+    $('#username').val(username)
+    console.log(username)
+
     var user = {
-        username: '520',
+        username: '',
         msg: '',
         img: '',
         imgindex: ''
@@ -133,6 +137,7 @@
     // 打开一个 web socket
     var ws = new WebSocket("ws://localhost:8080/");
     if ("WebSocket" in window) {
+        user.username = username
         //连接服务端
         ws.onopen = function() {
             ws.send(JSON.stringify(user));
@@ -142,6 +147,7 @@
         ws.onmessage = function (evt)
         {
             var obj = JSON.parse(evt.data);
+            console.log(obj)
             var username = $('#username').val()
 
             if (obj.username == username && obj.msg == undefined) {
@@ -153,7 +159,7 @@
                 console.log("单纯的连接")
             } else {
                 //收到他人发送的信息
-                if (obj.username != '520' && obj.msg != undefined) {
+                if (obj.username != username && obj.msg != undefined) {
                     addMsg(obj.img,obj.msg,false)
                 }
             }
