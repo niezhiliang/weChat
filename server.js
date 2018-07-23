@@ -1,11 +1,27 @@
-var  ws = require('nodejs-websocket');
+var ws = require('nodejs-websocket');
+var Utils = require('./utils')
+
+var util = new Utils();
 
 var server = ws.createServer(function (conn) {
 
     conn.on('text',function (str) {
-        console.log(str+"----1")
-        console.log(server.clients.length+"-6")
-        conn.sendText("520")
+
+        user = JSON.parse(str);
+
+        if (util.isExit(user.username)) {
+
+            //发送给所有用户
+            util.sendAll(server,JSON.stringify(user))
+
+        } else {
+            //设置用户头像
+            var name = user.username;
+            user= util.getImg()
+            user.setUserName(name)
+            util.sendSelf(conn,JSON.stringify(user))
+        }
+
     })
 
     conn.on('close',function (code,reason) {
