@@ -55,7 +55,7 @@ function Utils() {
             }
         }
     }
-    
+
     /**
      * 用户刚连接时只发送给他自己
      * @param ws
@@ -72,6 +72,61 @@ function Utils() {
         server.connections.forEach(function(connection) {
             connection.sendText(msg);
         })
+    }
+
+    /**
+     * 判断某值是否存在数组中
+     * @param arr
+     * @param value
+     * @returns {boolean}
+     */
+    this.arrayIsInclud = function (arr,value) {
+        for(var i = 0; i < arr.length; i++){
+            if(value === arr[i]){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 删除数组中某个值并返回
+     * @param array
+     * @param value
+     * @returns {*}
+     */
+    this.deleteArrayItem = function (arr,value) {
+        for (var i =0; i < arr.length; i++){
+            if (arr[i] == value) {
+                var temp = arr[i];
+                arr[i] = arr[arr.length-1];
+                arr[arr.length-1] = temp;
+                arr.pop();
+            }
+        }
+
+        return arr;
+    }
+
+    /**
+     * 删除某个用户 测试成功
+     * @param username
+     */
+    this.deleteSomeOne = function (username) {
+        console.log(users.length)
+        for (var i = 0; i < users.length; i++) {
+            var obj = users[i];
+            if (obj.username == username) {
+                var temp = users[i];
+                users[i] = users[users.length-1];
+                users[users.length-1] = temp;
+            }
+        }
+        users.pop();
+
+        for (obj in users) {
+            console.log(obj)
+        }
     }
 
 }

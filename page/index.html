@@ -59,6 +59,9 @@
             var username = $('#username').val()
             //新用户连接
             if (obj.username == username && obj.msg == undefined) {
+                if (obj.msg == 'del_user') {
+                    return
+                }
                 var users = JSON.parse(obj.users)
                 //收到用户信息放到隐藏域中
                 $('#img').val(obj.img)
@@ -69,11 +72,17 @@
                 //收到他人发送的信息
                 //添加他人的头像
                 if (obj.username != username && obj.msg == undefined) {
+                    console.log(obj)
                     addPerson(obj.img,$('#username').val(),null,false);
                 }
                 //添加他人发送的信息到消息框中
                 else if (obj.username != username && obj.msg != undefined) {
-                    addMsg(obj.img,obj.msg,false,obj.username)
+                    if (obj.msg == 'del_user') {
+                        //移掉下线的头像
+                        someOneLeft(obj.username);
+                    } else {
+                        addMsg(obj.img,obj.msg,false,obj.username)
+                    }
                 }
             }
         };
@@ -128,12 +137,11 @@
      */
     function addPerson(img,username,users,bool) {
         var end = '加入聊天';
-
         //添加头像,如果是连接人，则全部显示头像
         if (bool) {
             for (i=0; i< users.length;i++) {
                 var imghtml =
-                    '<img src="'+users[i].img+'" alt="'+users[i].username+'"'+
+                    '<img id="'+users[i].username+'" src="'+users[i].img+'" alt="'+users[i].username+'"'+
                     'class="am-img-thumbnail am-circle" width="50px" height="50px">';
                 $(".persons").append(imghtml);
             }
@@ -141,7 +149,7 @@
         //如果不是连接人，则只增加连接人的头像
         else {
             var imghtml =
-                '<img src="'+img+'" alt="'+username+'"'+
+                '<img id="'+username+'" src="'+img+'" alt="'+username+'"'+
                 'class="am-img-thumbnail am-circle" width="50px" height="50px">';
             $(".persons").append(imghtml);
         }
@@ -177,5 +185,23 @@
             addMsg(img,msg,true,username)
 
         }
+
+    /**
+     * 移除下线的用户
+     * @param username
+     */
+    function someOneLeft(username) {
+
+        console.log(username + "xcvxcvxcv")
+        //移除头像
+        var child=document.getElementById(username);
+        child.parentNode.removeChild(child);
+
+        var end = "离开聊天"
+       $('#chatname').hide(1000);
+        $('#welcome').html(username+end).show(1000);
+        //3秒后返回聊天主题
+        setTimeout(showChatTitle,5000)
+    }
 </script>
 </html>

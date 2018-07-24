@@ -6,9 +6,12 @@ var imgs = {
                     './amazeui/img/dog2.jpg',
                     './amazeui/img/pig.jpeg',
                     './amazeui/img/wu.jpg',
-                    './amazeui/img/yang.jpg'
+                    './amazeui/img/yang.jpg',
+                    './amazeui/img/happy.jpg',
+                    './amazeui/img/lyf.jpg',
+                    './amazeui/img/yj.jpg'
                   ],
-    imgSize: 7
+    imgSize: 10
 }
 
 
