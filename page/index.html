@@ -11,39 +11,32 @@
 
 </header>
 <body>
-    <div class="chattop">
+    <div class="chattop" >
         <span class="am-icon-cog am-animation-spin"></span>
-        <sprn>非常正经的聊天室</sprn>
+        <div id="chatname" style="display: inline">非常正经的聊天室</div>
+        <div id="welcome" style="display: inline;color: red">某某某加入聊天</div>
         <span class="am-icon-cog am-animation-spin"></span>
     </div>
     <div class="persons">
-        <img id="my-popover" src="./amazeui/img/pig.jpeg" alt="苏雨"
-             class="am-img-thumbnail am-circle" width="50px" height="50px">
-        <img src="./amazeui/img/dog.jpeg" alt="苏雨"
-             class="am-img-thumbnail am-circle" width="50px" height="50px">
-        <img src="./amazeui/img/cat.jpeg" alt="苏雨"
-             class="am-img-thumbnail am-circle" width="50px" height="50px">
-        <img src="./amazeui/img/wu.jpg" alt="苏雨"
-             class="am-img-thumbnail am-circle" width="50px" height="50px"> &nbsp;&nbsp;...
-        <input id ="img" type="hidden"/>
-        <input id ="imgindex" type="hidden"/>
-        <input id ="username" type="hidden" value="520"/>
+        <!--&nbsp;&nbsp;...-->
     </div>
-    <div class="chatcontent">
+    <input id ="img" type="hidden"/>
+    <input id ="imgindex" type="hidden"/>
+    <input id ="username" type="hidden"/>
+    <div  id="chatcontent" class="chatcontent">
         <!-- 这里是聊天记录的显示-->
     </div>
     <div class="input-area">
         <input id="msg" type="email" class="eidtmsg" id="doc-ipt-email-1" placeholder="输入要发送信息">
         <button type="button" class="am-btn am-btn-success am-round send" onclick="send()">发送</button>
     </div>
-
 </body>
 <script>
+    $('#welcome').hide();
 
     var username = Math.floor(Math.random()*(100000));
     $('#username').val(username)
     console.log(username)
-
     var user = {
         username: '',
         msg: '',
@@ -63,20 +56,24 @@
         ws.onmessage = function (evt)
         {
             var obj = JSON.parse(evt.data);
-            console.log(obj)
             var username = $('#username').val()
-
+            //新用户连接
             if (obj.username == username && obj.msg == undefined) {
-
+                var users = JSON.parse(obj.users)
                 //收到用户信息放到隐藏域中
                 $('#img').val(obj.img)
                 $('#imgindex').val(obj.imgindex)
-
+                addPerson(obj.img,$('#username').val(),users,true);
                 console.log("单纯的连接")
             } else {
                 //收到他人发送的信息
-                if (obj.username != username && obj.msg != undefined) {
-                    addMsg(obj.img,obj.msg,false)
+                //添加他人的头像
+                if (obj.username != username && obj.msg == undefined) {
+                    addPerson(obj.img,$('#username').val(),null,false);
+                }
+                //添加他人发送的信息到消息框中
+                else if (obj.username != username && obj.msg != undefined) {
+                    addMsg(obj.img,obj.msg,false,obj.username)
                 }
             }
         };
@@ -84,40 +81,81 @@
         ws.onclose = function()
         {
             // 关闭 websocket
-            // alert("连接已关闭...");
+             //alert("连接已关闭...");
         };
     }
 
-        function addMsg(img,msg,bool) {
-            //自己发信息要添加的html(bool 为true)
-            var html =
-                '<div class="sendbody">'+
-                '<div style="display: inline;float: right">'+
-                '<img src="'+img+'" alt="苏雨"class="am-img-thumbnail am-circle" width="40px" height="40px">'+
-                '</div>'+
-                '<div  class="msgsend" style="text-align: right">'
-                + msg +
-                '</div>'+
-                '</div>';
 
-            //收到他人信息时 要添加的html(bool为false)
-            var friendmsg =
-                '<div class="receivebody">'+
-                '<div style="display: inline;">'+
-                '<img src="'+img+'" alt="苏雨"class="am-img-thumbnail am-circle" width="40px" height="40px">'+
-                '</div>'+
-                '<div  class="msgreceive triangle-left">'
-                + msg +
-                '</div>'+
-                '</div>';
+    function addMsg(img,msg,bool,name) {
+        //自己发信息要添加的html(bool 为true)
+        var html =
+            '<div class="sendbody">'+
+            '<div style="display: inline;float: right">'+
+            '<img src="'+img+'" alt="'+name+'"class="am-img-thumbnail am-circle" width="40px" height="40px">'+
+            '</div>'+
+            '<div  class="msgsend" style="text-align: right">'
+            + msg +
+            '</div>'+
+            '</div>';
 
-            if (!bool) {
-                html = friendmsg;
-            }
+        //收到他人信息时 要添加的html(bool为false)
+        var friendmsg =
+            '<div class="receivebody">'+
+            '<div style="display: inline;">'+
+            '<img src="'+img+'" alt="'+name+'"class="am-img-thumbnail am-circle" width="40px" height="40px">'+
+            '</div>'+
+            '<div  class="msgreceive triangle-left">'
+            + msg +
+            '</div>'+
+            '</div>';
 
-            $(".chatcontent").append(html)
-
+        if (!bool) {
+            html = friendmsg;
         }
+
+        $(".chatcontent").append(html)
+
+        //聊天框位于底部
+        var div = document.getElementById('chatcontent');
+        div.scrollTop = div.scrollHeight;
+
+    }
+
+
+
+    /**
+     * 用户加入聊天后触发的事件
+     */
+    function addPerson(img,username,users,bool) {
+        var end = '加入聊天';
+
+        //添加头像,如果是连接人，则全部显示头像
+        if (bool) {
+            for (i=0; i< users.length;i++) {
+                var imghtml =
+                    '<img src="'+users[i].img+'" alt="'+users[i].username+'"'+
+                    'class="am-img-thumbnail am-circle" width="50px" height="50px">';
+                $(".persons").append(imghtml);
+            }
+        }
+        //如果不是连接人，则只增加连接人的头像
+        else {
+            var imghtml =
+                '<img src="'+img+'" alt="'+username+'"'+
+                'class="am-img-thumbnail am-circle" width="50px" height="50px">';
+            $(".persons").append(imghtml);
+        }
+            $('#chatname').hide(1000);
+            $('#welcome').html(username+end).show(1000);
+            //3秒后返回聊天主题
+            setTimeout(showChatTitle,5000)
+
+    }
+
+    function showChatTitle() {
+        $('#welcome').hide(500);
+        $('#chatname').show(1000);
+    }
 
     /**
      * 发送信息给服务器做转接
@@ -136,7 +174,8 @@
             ws.send(JSON.stringify(user));
 
             //将发送内容加到聊天记录框中
-            addMsg(img,msg,true)
+            addMsg(img,msg,true,username)
+
         }
 </script>
 </html>

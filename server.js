@@ -10,18 +10,17 @@ var server = ws.createServer(function (conn) {
         user = JSON.parse(str);
 
         if (util.isExit(user.username)) {
-
             //发送给所有用户
-            util.sendAll(server,JSON.stringify(user))
+
 
         } else {
             //设置用户头像
             var name = user.username;
-            user= util.getImg()
+            user= util.getImg(name)
             user.setUserName(name)
-            util.sendSelf(conn,JSON.stringify(user))
+            //util.sendSelf(conn,JSON.stringify(user))
         }
-
+        util.sendAll(server,JSON.stringify(user))
     })
 
     conn.on('close',function (code,reason) {

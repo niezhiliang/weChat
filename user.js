@@ -8,6 +8,8 @@ function User() {
     var msg;
     //图片下标
     var imgindex;
+    //用户的信息集合
+    var users;
 
 
     this.setUserName = function (name) {
@@ -36,6 +38,13 @@ function User() {
     }
     this.getImgIndex = function () {
         return this.imgindex;
+    }
+
+    this.setUsers = function (usersArray) {
+        this.users = usersArray;
+    }
+    this.getUsers = function () {
+        return this.users;
     }
 }
 

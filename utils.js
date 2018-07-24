@@ -1,11 +1,11 @@
 var imags = require('./imgConfig')
 var User = require('./user')
+
+
 //存储在线用户
 var users = [];
 
 function Utils() {
-
-
     /**
      * 查看用户是否在线
      * @param username
@@ -24,7 +24,6 @@ function Utils() {
         var user = new User();
         //第一次连接就加入数组
         user.setUserName(username)
-        users.push(user)
         return false;
     }
 
@@ -32,7 +31,7 @@ function Utils() {
      * 新连接用户获取头像
      * @param users 已经在线的用户数组
      */
-    this.getImg = function () {
+    this.getImg = function (name) {
 
         var user = new User();
         var nums = []
@@ -48,11 +47,15 @@ function Utils() {
             if (nums.indexOf(index) == -1) {
                 user.setImg(imags.imgArray[index])
                 user.setImgIndex(index)
+                user.setUserName(name)
+                //添加用户信息
+                users.push(user);
+                user.setUsers(JSON.stringify(users));
                 return user;
             }
         }
     }
-
+    
     /**
      * 用户刚连接时只发送给他自己
      * @param ws
