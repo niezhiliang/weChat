@@ -1,15 +1,15 @@
 var imgs = {
     imgArray:     [
-                    './amazeui/img/cat.jpeg',
-                    './amazeui/img/cat2.jpg',
-                    './amazeui/img/dog.jpeg',
-                    './amazeui/img/dog2.jpg',
-                    './amazeui/img/pig.jpeg',
-                    './amazeui/img/wu.jpg',
-                    './amazeui/img/yang.jpg',
-                    './amazeui/img/happy.jpg',
-                    './amazeui/img/lyf.jpg',
-                    './amazeui/img/yj.jpg'
+                    './page/amazeui/img/cat.jpeg',
+                    './page/amazeui/img/cat2.jpg',
+                    './page/amazeui/img/dog.jpeg',
+                    './page/amazeui/img/dog2.jpg',
+                    './page/amazeui/img/pig.jpeg',
+                    './page/amazeui/img/wu.jpg',
+                    './page/amazeui/img/yang.jpg',
+                    './page/amazeui/img/happy.jpg',
+                    './page/amazeui/img/lyf.jpg',
+                    './page/amazeui/img/yj.jpg'
                   ],
     imgSize: 10
 }
