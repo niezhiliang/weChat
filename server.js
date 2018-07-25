@@ -33,7 +33,7 @@ var server = ws.createServer(function (conn) {
         console.log("异常关闭")
     })
 
-}).listen(8080);
+}).listen(9999);
 
 console.log('websocket初始化完成')
 
