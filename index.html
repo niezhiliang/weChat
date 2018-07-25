@@ -1,7 +1,7 @@
 <html>
 <header >
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-    <title>聊天室</title>
+    <title>正经聊天室</title>
 
     <script src="page/amazeui/js/amazeui.js"></script>
     <link rel="stylesheet" href="page/amazeui/css/amazeui.css"/>
@@ -27,8 +27,13 @@
         <!-- 这里是聊天记录的显示-->
     </div>
     <div class="input-area">
-        <input id="msg" type="email" class="eidtmsg" id="doc-ipt-email-1" placeholder="输入要发送信息">
+        <!--<input id="msg" type="email" class="eidtmsg" id="doc-ipt-email-1" placeholder="输入要发送信息">-->
+
+        <div class="am-form-group">
+            <textarea class="eidtmsg" rows="5" id="msg" placeholder="输入要发送信息"></textarea>
+
         <button type="button" class="am-btn am-btn-success am-round send" onclick="send()">发送</button>
+        </div>
     </div>
 </body>
 <script>
@@ -184,6 +189,8 @@
             //将发送内容加到聊天记录框中
             addMsg(img,msg,true,username)
 
+            $('#msg').val('')
+
         }
 
     /**
@@ -203,5 +210,9 @@
         //3秒后返回聊天主题
         setTimeout(showChatTitle,5000)
     }
+
+    $("#msg").focus(function(){
+
+    });
 </script>
 </html>

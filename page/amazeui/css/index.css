@@ -80,16 +80,8 @@ body {
     border-radius:5px;
 }
 .send {
-    width:15%;
     height:60%;
     margin-top:15px;
     margin-right:1%;
     float: right;
-}
-.caret {
-    width: 0;
-    height: 0;
-    border-width: 0 10px 15px;
-    border-color: transparent transparent blue;
-    border-style: none dotted solid;
 }
