@@ -1,7 +1,7 @@
 # weChat
 基于nodejs-websocket和html5实现的实时聊天室
 
-<a href="wechat.niezhiliang.com">测试地址</a>
+<a href="http://wechat.niezhiliang.com">测试地址</a>
 
 
 ![demo](https://github.com/niezhiliang/weChat/blob/master/page/amazeui/img/chat.jpeg)
