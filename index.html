@@ -61,7 +61,7 @@
         ws.onmessage = function (evt)
         {
             var obj = JSON.parse(evt.data);
-            console.log(obj.username+"hahaha")
+           // console.log(obj.username+"hahaha")
             var username = $('#username').val()
             //新用户连接
             if (obj.username == username && obj.msg == undefined) {
@@ -78,7 +78,7 @@
                 //收到他人发送的信息
                 //添加他人的头像
                 if (obj.username != username && obj.msg == undefined) {
-                    console.log(obj)
+                    //console.log(obj)
                     addPerson(obj.img,obj.username,null,false);
                 }
                 //添加他人发送的信息到消息框中
