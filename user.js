@@ -10,6 +10,8 @@ function User() {
     var imgindex;
     //用户的信息集合
     var users;
+    //用户对应的连接key
+    var socketkey;
 
 
     this.setUserName = function (name) {
@@ -45,6 +47,13 @@ function User() {
     }
     this.getUsers = function () {
         return this.users;
+    }
+
+    this.seSocketkey = function (key) {
+        this.socketkey = key;
+    }
+    this.getSocketKey = function () {
+        return this.socketkey;
     }
 }
 

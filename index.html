@@ -49,7 +49,7 @@
         imgindex: ''
     }
     // 打开一个 web socket
-    var ws = new WebSocket("ws://www.niezhiliang.com:9999/");
+    var ws = new WebSocket("ws://127.0.0.1:9999/");
     if ("WebSocket" in window) {
         user.username = username
         //连接服务端
@@ -61,6 +61,7 @@
         ws.onmessage = function (evt)
         {
             var obj = JSON.parse(evt.data);
+            console.log(obj.username+"hahaha")
             var username = $('#username').val()
             //新用户连接
             if (obj.username == username && obj.msg == undefined) {
@@ -78,11 +79,11 @@
                 //添加他人的头像
                 if (obj.username != username && obj.msg == undefined) {
                     console.log(obj)
-                    addPerson(obj.img,$('#username').val(),null,false);
+                    addPerson(obj.img,obj.username,null,false);
                 }
                 //添加他人发送的信息到消息框中
                 else if (obj.username != username && obj.msg != undefined) {
-                    if (obj.msg == 'del_user') {
+                    if (obj.msg == 'del_user_command') {
                         //移掉下线的头像
                         someOneLeft(obj.username);
                     } else {

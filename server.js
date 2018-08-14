@@ -13,24 +13,29 @@ var server = ws.createServer(function (conn) {
         } else {
             //设置用户头像
             var name = user.username;
-            user= util.getImg(name)
+            user= util.getImg(name,server.connections[0].key)
             user.setUserName(name)
-            //util.sendSelf(conn,JSON.stringify(user))
-        }
-        //用户下线
-        if(user.msg == 'del_user') {
-            util.deleteSomeOne(user.username);
+
+            //新连接的key
+            console.log(this.key)
+
         }
         util.sendAll(server,JSON.stringify(user))
-
     })
 
     conn.on('close',function (code,reason) {
         console.log("关闭连接")
+        var user = {
+            'username':'',
+            'msg': 'del_user_command'
+        }
+        user.username = util.deleteSomeOne(this.key)
+        util.sendAll(server,JSON.stringify(user))
     })
 
     conn.on('error',function (code,reason) {
         console.log("异常关闭")
+        //util.deleteSomeOne(this.key);
     })
 
 }).listen(9999);

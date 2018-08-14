@@ -31,7 +31,7 @@ function Utils() {
      * 新连接用户获取头像
      * @param users 已经在线的用户数组
      */
-    this.getImg = function (name) {
+    this.getImg = function (name,key) {
 
         var user = new User();
         var nums = []
@@ -48,6 +48,7 @@ function Utils() {
                 user.setImg(imags.imgArray[index])
                 user.setImgIndex(index)
                 user.setUserName(name)
+                user.seSocketkey(key)
                 //添加用户信息
                 users.push(user);
                 user.setUsers(JSON.stringify(users));
@@ -112,21 +113,39 @@ function Utils() {
      * 删除某个用户 测试成功
      * @param username
      */
-    this.deleteSomeOne = function (username) {
-        console.log(users.length)
+    // this.deleteSomeOne = function (username) {
+    //     console.log(users.length)
+    //     for (var i = 0; i < users.length; i++) {
+    //         var obj = users[i];
+    //         if (obj.username == username) {
+    //             var temp = users[i];
+    //             users[i] = users[users.length-1];
+    //             users[users.length-1] = temp;
+    //         }
+    //     }
+    //     users.pop();
+    //
+    //     for (obj in users) {
+    //         console.log(obj)
+    //     }
+    // }
+
+    /**
+     * 通过连接的key 来删除用户
+     * @param key
+     */
+    this.deleteSomeOne = function (key) {
         for (var i = 0; i < users.length; i++) {
             var obj = users[i];
-            if (obj.username == username) {
+            var name = obj.username
+            if (obj.socketkey == key) {
                 var temp = users[i];
                 users[i] = users[users.length-1];
                 users[users.length-1] = temp;
             }
         }
-        users.pop();
-
-        for (obj in users) {
-            console.log(obj)
-        }
+        users.pop()
+        return name;
     }
 
 }
